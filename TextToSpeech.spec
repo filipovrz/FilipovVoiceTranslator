@@ -1,5 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
-from pathlib import Path
+import os
 
 from PyInstaller.utils.hooks import collect_all
 
@@ -21,16 +21,19 @@ hiddenimports = (
     ]
 )
 
-root = Path(SPECPATH)
+spec_root = os.path.dirname(os.path.abspath(SPEC))
 extra_datas = [
-    (str(root / "VERSION"), "."),
-    (str(root / "tts_app" / "data" / "google_languages.json"), "tts_app/data"),
+    (os.path.join(spec_root, "VERSION"), "."),
+    (
+        os.path.join(spec_root, "tts_app", "data", "google_languages.json"),
+        os.path.join("tts_app", "data"),
+    ),
 ]
 datas = list(datas) + extra_datas
 
 a = Analysis(
     ["main.py"],
-    pathex=[],
+    pathex=[spec_root],
     binaries=binaries,
     datas=datas,
     hiddenimports=hiddenimports,

@@ -28,7 +28,11 @@ Desktop.ini
 
 # App build / installer artifacts
 installer_output/
-*.spec.bak
+FilipovVoiceTranslatorSetup_*.exe
+*_portable.zip
+pyinstaller_log.txt
+build/
+dist/
 
 # IDE
 .idea/
